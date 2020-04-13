@@ -1,0 +1,42 @@
+﻿@model ShoppingCartViewModel
+
+<h2>Your shopping cart</h2>
+<h4>Here are the delicious pies in your shopping cart.</h4>
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Selected amount</th>
+            <th scope="col">Pie</th>
+            <th scope="col">Price</th>
+            <th scope="col">Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+        {
+            <tr>
+                <td class="text-center">
+                @line.Amount
+                    <a class="badge badge-danger" asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-pieId="@line.Pie.PieId">Remove one</a>
+                </td>
+                <td class="text-left">@line.Pie.Name</td>
+                <td class="text-right">@line.Pie.Price.ToString("c")</td>
+                <td class="text-right">
+                    @((line.Amount * line.Pie.Price).ToString("c"))
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td class="text-right">
+                @Model.ShoppingCartTotal.ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+
+<a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Check out now!</a>
+

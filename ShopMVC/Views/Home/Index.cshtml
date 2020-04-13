@@ -1,0 +1,15 @@
+﻿@model HomeViewModel
+
+<h2 class="mt-2">Pies of the week</h2>
+<h4>Our weekly selection - just for you!</h4>
+
+<hr />
+
+<div class="row">
+    @foreach (var pie in Model.PiesOfTheWeek)
+    {
+        <partial name="_PieCard" model="pie" />
+    }
+</div>
+
+<hr />
